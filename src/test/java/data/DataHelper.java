@@ -1,7 +1,6 @@
 package data;
 
 import lombok.Value;
-import org.junit.rules.Verifier;
 
 
 public class DataHelper {
@@ -25,5 +24,23 @@ public class DataHelper {
 
     public static VerificationCode getVerificationCodeFor(AuthInfo authInfo) {
         return new VerificationCode("12345");
+    }
+
+    @Value
+    public static class FirstCard {
+        private String firstCard;
+    }
+
+    public static FirstCard getFirstCardNumber() {
+        return new FirstCard("5559 0000 0000 0001");
+    }
+
+    @Value
+    public static class SecondCard {
+        private String secondCard;
+    }
+
+    public static SecondCard getSecondCardNumber() {
+        return new SecondCard("5559 0000 0000 0002");
     }
 }
