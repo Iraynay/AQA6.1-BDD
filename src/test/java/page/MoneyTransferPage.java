@@ -11,18 +11,24 @@ import data.DataHelper;
 import static com.codeborne.selenide.Selenide.$;
 
 public class MoneyTransferPage {
-    private SelenideElement initiateTopUp = $("[data-test-id='action-deposit']");
     private SelenideElement amount = $("[data-test-id='amount'] .input__control");
     private SelenideElement debitAccount = $("[data-test-id='from'] .input__control");
     private SelenideElement topUp = $("[data-test-id='action-transfer']");
 
 
-
-    public DashboardPage moneyTransferFor01Card(String transferAmount) {
-        String secondCardNumber = String.valueOf(DataHelper.getSecondCardNumber());
-        initiateTopUp.click();
+    public DashboardPage moneyTransferFor01(String transferAmount, String debitCard) {
+        new DashboardPage().topUpForCard1();
         amount.setValue(transferAmount);
-        debitAccount.setValue(secondCardNumber);
+        debitAccount.setValue(debitCard);
+        topUp.click();
+        return new DashboardPage();
+
+    }
+
+    public DashboardPage moneyTransferFor02(String transferAmount, String debitCard) {
+        new DashboardPage().topUpForCard2();
+        amount.setValue(transferAmount);
+        debitAccount.setValue(debitCard);
         topUp.click();
         return new DashboardPage();
 

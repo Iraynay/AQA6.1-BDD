@@ -5,11 +5,13 @@ import com.codeborne.selenide.SelenideElement;
 import lombok.val;
 
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.Selenide.*;
 
 public class DashboardPage {
     private SelenideElement heading = $("[data-test-id=dashboard]");
+    private SelenideElement initiateTopUpForCard1 = $("[data-test-id='92df3f1c-a033-48e6-8390-206f6b1f56c0'] .button__content");
+    private SelenideElement initiateTopUpForCard2 = $("[data-test-id='0f3f5c2a-249e-4c3d-8287-09f7a039391d'] .button__content");
+    private SelenideElement yourCards = $x("//h1[contains(text(),'Ваши карты')]");
     private static ElementsCollection card1 = $$("[data-test-id='92df3f1c-a033-48e6-8390-206f6b1f56c0']");
     private static ElementsCollection card2 = $$("[data-test-id='0f3f5c2a-249e-4c3d-8287-09f7a039391d']");
 
@@ -18,6 +20,20 @@ public class DashboardPage {
 
     public DashboardPage() {
         heading.shouldBe(visible);
+    }
+
+    public void StartPage() {
+        yourCards.shouldBe(visible);
+    }
+
+    public MoneyTransferPage topUpForCard1() {
+        initiateTopUpForCard1.click();
+        return new MoneyTransferPage();
+    }
+
+    public MoneyTransferPage topUpForCard2() {
+        initiateTopUpForCard2.click();
+        return new MoneyTransferPage();
     }
 
     public static int getFirstCardBalance() {
