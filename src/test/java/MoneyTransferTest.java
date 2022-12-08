@@ -19,30 +19,6 @@ public class MoneyTransferTest {
 
 
     @Test
-    void shouldTransferMoneyClickTopUpFor01Card() {
-        open("http://localhost:9999");
-        var loginPage = new LoginPageV1();
-        var authInfo = DataHelper.getAuthInfo();
-        var verificationPage = loginPage.validLogin(authInfo);
-        var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
-        verificationPage.validVerify(verificationCode);
-        var moneyTransferFor01Card = new MoneyTransferPage().moneyTransferFor01(transferAmount, firstCardNumber);
-        new page.DashboardPage().StartPage();
-    }
-
-    @Test
-    void shouldTransferMoneyClickTopUpFor02Card() {
-        open("http://localhost:9999");
-        var loginPage = new LoginPageV1();
-        var authInfo = DataHelper.getAuthInfo();
-        var verificationPage = loginPage.validLogin(authInfo);
-        var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
-        verificationPage.validVerify(verificationCode);
-        var moneyTransferFor01Card = new MoneyTransferPage().moneyTransferFor02(transferAmount, firstCardNumber);
-        new page.DashboardPage().StartPage();
-    }
-
-    @Test
     void shouldCheckBalanceFirstCardTransferFor01Card() {
         open("http://localhost:9999");
         var loginPage = new LoginPageV1();
@@ -51,24 +27,13 @@ public class MoneyTransferTest {
         var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
         verificationPage.validVerify(verificationCode);
         var firstCardStartBalance = page.DashboardPage.getFirstCardBalance();
-        var moneyTransferFor01Card = new MoneyTransferPage().moneyTransferFor01(transferAmount, secondCardNumber);
-        var firstCardFinalBalance = page.DashboardPage.getFirstCardBalance();
-        int transferAmountInt = Integer.parseInt(transferAmount);
-        assertEquals(firstCardStartBalance + transferAmountInt, firstCardFinalBalance);
-    }
-
-    @Test
-    void shouldCheckBalanceSecondCardTransferFor01Card() {
-        open("http://localhost:9999");
-        var loginPage = new LoginPageV1();
-        var authInfo = DataHelper.getAuthInfo();
-        var verificationPage = loginPage.validLogin(authInfo);
-        var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
-        verificationPage.validVerify(verificationCode);
         var secondCardStartBalance = page.DashboardPage.getSecondCardBalance();
-        var moneyTransferFor01Card = new MoneyTransferPage().moneyTransferFor01(transferAmount, secondCardNumber);
+        new DashboardPage().topUpForCard1();
+        var moneyTransferFor01Card = new MoneyTransferPage().moneyTransferFor(transferAmount, secondCardNumber);
+        var firstCardFinalBalance = page.DashboardPage.getFirstCardBalance();
         var secondCardFinalBalance = page.DashboardPage.getSecondCardBalance();
         int transferAmountInt = Integer.parseInt(transferAmount);
+        assertEquals(firstCardStartBalance + transferAmountInt, firstCardFinalBalance);
         assertEquals(secondCardStartBalance - transferAmountInt, secondCardFinalBalance);
     }
 
@@ -81,24 +46,13 @@ public class MoneyTransferTest {
         var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
         verificationPage.validVerify(verificationCode);
         var firstCardStartBalance = page.DashboardPage.getFirstCardBalance();
-        var moneyTransferFor01Card = new MoneyTransferPage().moneyTransferFor02(transferAmount, firstCardNumber);
-        var firstCardFinalBalance = page.DashboardPage.getFirstCardBalance();
-        int transferAmountInt = Integer.parseInt(transferAmount);
-        assertEquals(firstCardStartBalance - transferAmountInt, firstCardFinalBalance);
-    }
-
-    @Test
-    void shouldCheckBalanceSecondCardTransferFor02Card() {
-        open("http://localhost:9999");
-        var loginPage = new LoginPageV1();
-        var authInfo = DataHelper.getAuthInfo();
-        var verificationPage = loginPage.validLogin(authInfo);
-        var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
-        verificationPage.validVerify(verificationCode);
         var secondCardStartBalance = page.DashboardPage.getSecondCardBalance();
-        var moneyTransferFor01Card = new MoneyTransferPage().moneyTransferFor02(transferAmount, firstCardNumber);
+        new DashboardPage().topUpForCard2();
+        var moneyTransferFor01Card = new MoneyTransferPage().moneyTransferFor(transferAmount, firstCardNumber);
+        var firstCardFinalBalance = page.DashboardPage.getFirstCardBalance();
         var secondCardFinalBalance = page.DashboardPage.getSecondCardBalance();
         int transferAmountInt = Integer.parseInt(transferAmount);
+        assertEquals(firstCardStartBalance - transferAmountInt, firstCardFinalBalance);
         assertEquals(secondCardStartBalance + transferAmountInt, secondCardFinalBalance);
     }
 

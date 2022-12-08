@@ -16,17 +16,7 @@ public class MoneyTransferPage {
     private SelenideElement topUp = $("[data-test-id='action-transfer']");
 
 
-    public DashboardPage moneyTransferFor01(String transferAmount, String debitCard) {
-        new DashboardPage().topUpForCard1();
-        amount.setValue(transferAmount);
-        debitAccount.setValue(debitCard);
-        topUp.click();
-        return new DashboardPage();
-
-    }
-
-    public DashboardPage moneyTransferFor02(String transferAmount, String debitCard) {
-        new DashboardPage().topUpForCard2();
+    public DashboardPage moneyTransferFor(String transferAmount, String debitCard) {
         amount.setValue(transferAmount);
         debitAccount.setValue(debitCard);
         topUp.click();

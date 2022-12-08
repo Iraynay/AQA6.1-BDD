@@ -22,7 +22,7 @@ public class DashboardPage {
         heading.shouldBe(visible);
     }
 
-    public void StartPage() {
+    public void startPage() {
         yourCards.shouldBe(visible);
     }
 
